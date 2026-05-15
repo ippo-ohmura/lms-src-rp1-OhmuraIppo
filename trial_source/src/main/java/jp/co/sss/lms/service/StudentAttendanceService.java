@@ -333,5 +333,23 @@ public class StudentAttendanceService {
 		// 完了メッセージ
 		return messageUtil.getMessage(Constants.PROP_KEY_ATTENDANCE_UPDATE_NOTICE);
 	}
+	
+	//過去日の未入力チェック
+	public Boolean notEnterCheck(){
+		
+		// 本日の研修日
+		Date trainingDate = attendanceUtil.getTrainingDate();
+		
+		//未入力日の該当件数が1件でも存在する場合
+		Integer count =tStudentAttendanceMapper.notEnterCount(loginUserDto.getLmsUserId(),
+				Constants.DB_FLG_FALSE,
+				trainingDate);
+		
+		if(count > 0) {
+			return true;
+		}
+		
+		return false;
+	}
 
 }
