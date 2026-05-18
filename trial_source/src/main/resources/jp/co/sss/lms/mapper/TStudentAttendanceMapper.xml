@@ -87,7 +87,6 @@
 	</update>
 
 
-	<!--タスク25-->
 	<select id="notEnterCount" resultType = "Integer">
 		SELECT COUNT(*)
 		FROM
