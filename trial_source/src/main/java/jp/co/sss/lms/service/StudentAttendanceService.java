@@ -219,7 +219,7 @@ public class StudentAttendanceService {
 		attendanceForm.setUserName(loginUserDto.getUserName());
 		attendanceForm.setLeaveFlg(loginUserDto.getLeaveFlg());
 		attendanceForm.setBlankTimes(attendanceUtil.setBlankTime());
-		//task.26：時間と分のHashMapを作成する。
+		// 時間と分のHashMapを作成
 		attendanceForm.setHours(attendanceUtil.getHourMap());
 		attendanceForm.setMinutes(attendanceUtil.getMinuteMap());
 
@@ -254,7 +254,7 @@ public class StudentAttendanceService {
 					.dateToString(attendanceManagementDto.getTrainingDate(), "yyyy年M月d日(E)"));
 			dailyAttendanceForm.setStatusDispName(attendanceManagementDto.getStatusDispName());
 			
-			//task.26：出退勤の時間と分をそれぞれ格納する。
+			// 出退勤の時間と分をそれぞれ格納
 			dailyAttendanceForm.setTrainingStartTimeHour(
 					attendanceUtil.getHour(attendanceManagementDto.getTrainingStartTime()));
 			dailyAttendanceForm.setTrainingStartTimeMinute(
@@ -285,6 +285,9 @@ public class StudentAttendanceService {
 		// 現在の勤怠情報（受講生入力）リストを取得
 		List<TStudentAttendance> tStudentAttendanceList = tStudentAttendanceMapper
 				.findByLmsUserId(lmsUserId, Constants.DB_FLG_FALSE);
+		
+		// 入力された出退勤の{時間}{分}をhh:mm形式に変換
+		formatConversion(attendanceForm);
 
 		// 入力された情報を更新用のエンティティに移し替え
 		Date date = new Date();
@@ -305,7 +308,7 @@ public class StudentAttendanceService {
 				}
 			}
 			tStudentAttendance.setLmsUserId(lmsUserId);
-			tStudentAttendance.setAccountId(loginUserDto.getAccountId());
+			tStudentAttendance.setAccountId(loginUserDto.getAccountId());			
 			// 出勤時刻整形
 			TrainingTime trainingStartTime = null;
 			trainingStartTime = new TrainingTime(dailyAttendanceForm.getTrainingStartTime());
@@ -367,6 +370,38 @@ public class StudentAttendanceService {
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * 入力された出退勤の{時間}{分}をhh:mm形式に変換
+	 * @param attendanceForm
+	 */
+	public void formatConversion(AttendanceForm attendanceForm){
+		
+		for (DailyAttendanceForm dailyAttendanceForm : attendanceForm.getAttendanceList()) {
+			
+			TrainingTime trainingStartTime = null;
+			TrainingTime trainingEndTime = null;
+			
+			//出勤時間の編集
+			if(dailyAttendanceForm.getTrainingStartTimeHour()!= null && 
+					dailyAttendanceForm.getTrainingStartTimeMinute()!= null) {
+				
+				trainingStartTime = new TrainingTime(dailyAttendanceForm.getTrainingStartTimeHour(),
+						dailyAttendanceForm.getTrainingStartTimeMinute());
+				
+				dailyAttendanceForm.setTrainingStartTime(trainingStartTime.getFormattedString()); 
+			}
+			//退勤時間の編集
+			if(dailyAttendanceForm.getTrainingEndTimeHour()!= null && 
+					dailyAttendanceForm.getTrainingEndTimeMinute()!= null) {
+				
+				trainingEndTime = new TrainingTime(dailyAttendanceForm.getTrainingEndTimeHour(),
+						dailyAttendanceForm.getTrainingEndTimeMinute());
+				
+				dailyAttendanceForm.setTrainingEndTime(trainingEndTime.getFormattedString());
+			}
+		}
 	}
 
 }

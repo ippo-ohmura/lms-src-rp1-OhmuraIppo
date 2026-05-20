@@ -185,8 +185,7 @@ public class AttendanceUtil {
 		if(timeString == null || timeString.isEmpty()) {
 			return null;
 		}
-		String[] hour = timeString.split(":");
-		return Integer.valueOf(hour[0]);
+		return Integer.parseInt(timeString.substring(0, 2));
 	}
 	
 	/**
@@ -199,8 +198,7 @@ public class AttendanceUtil {
 		if(timeString == null || timeString.isEmpty()) {
 			return null;
 		}
-		String[] minute = timeString.split(":");
-		return Integer.valueOf(minute[1]);
+		return Integer.parseInt(timeString.substring(3, 5));
 	}
 
 }
