@@ -47,7 +47,8 @@ public class AttendanceController {
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
 		
-		//現在より過去に未入力が無いかチェック
+		// 大村一峰 – Task.25
+		// 現在より過去に未入力が無いかチェック
 		boolean notEnterFlg = studentAttendanceService.notEnterCheck();
 		model.addAttribute("notEnterFlg",notEnterFlg);
 		

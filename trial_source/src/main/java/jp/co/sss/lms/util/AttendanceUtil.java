@@ -150,6 +150,7 @@ public class AttendanceUtil {
 	/**
 	 * 時間のプルダウンマップを生成
 	 * 
+	 * @author 大村一峰  – Task.26
 	 * @return 時間
 	 */
 	public LinkedHashMap<Integer, String> getHourMap() {
@@ -164,6 +165,7 @@ public class AttendanceUtil {
 	/**
 	 * 分のプルダウンマップを生成
 	 * 
+	 * @author 大村一峰  – Task.26
 	 * @return 分
 	 */
 	public LinkedHashMap<Integer, String> getMinuteMap() {
@@ -178,7 +180,8 @@ public class AttendanceUtil {
 	/**
 	 * 時間(時)の切り出し
 	 * 
-	 * @param time
+	 * @author 大村一峰  – Task.26
+	 * @param timeString
 	 * @return 出退勤時間(時間)
 	 */
 	public Integer getHour(String timeString) {
@@ -191,7 +194,8 @@ public class AttendanceUtil {
 	/**
 	 * 時間(分)の切り出し
 	 * 
-	 * @param time
+	 * @author 大村一峰  – Task.26
+	 * @param timeString
 	 * @return 出退勤時間(分)
 	 */
 	public Integer getMinute(String timeString) {

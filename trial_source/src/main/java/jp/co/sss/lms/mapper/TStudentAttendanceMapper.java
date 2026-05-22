@@ -68,6 +68,7 @@ public interface TStudentAttendanceMapper {
 	/**
 	 * 勤怠情報（受講生入力）現在日付より前日付で勤怠未入力数を取得
 	 * 
+	 * @author 大村一峰  – Task.25
 	 * @param lmsUserId
 	 * @param deleteFlg
 	 * @param trainingDate

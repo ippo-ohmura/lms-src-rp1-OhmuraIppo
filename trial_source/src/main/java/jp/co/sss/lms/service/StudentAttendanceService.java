@@ -219,6 +219,7 @@ public class StudentAttendanceService {
 		attendanceForm.setUserName(loginUserDto.getUserName());
 		attendanceForm.setLeaveFlg(loginUserDto.getLeaveFlg());
 		attendanceForm.setBlankTimes(attendanceUtil.setBlankTime());
+		// 大村一峰 – Task.26
 		// 時間と分のHashMapを作成
 		attendanceForm.setHours(attendanceUtil.getHourMap());
 		attendanceForm.setMinutes(attendanceUtil.getMinuteMap());
@@ -253,7 +254,7 @@ public class StudentAttendanceService {
 			dailyAttendanceForm.setDispTrainingDate(dateUtil
 					.dateToString(attendanceManagementDto.getTrainingDate(), "yyyy年M月d日(E)"));
 			dailyAttendanceForm.setStatusDispName(attendanceManagementDto.getStatusDispName());
-			
+			// 大村一峰 – Task.26
 			// 出退勤の時間と分をそれぞれ格納
 			dailyAttendanceForm.setTrainingStartTimeHour(
 					attendanceUtil.getHour(attendanceManagementDto.getTrainingStartTime()));
@@ -286,6 +287,7 @@ public class StudentAttendanceService {
 		List<TStudentAttendance> tStudentAttendanceList = tStudentAttendanceMapper
 				.findByLmsUserId(lmsUserId, Constants.DB_FLG_FALSE);
 		
+		// 大村一峰 – Task.26
 		// 入力された出退勤の{時間}{分}をhh:mm形式に変換
 		formatConversion(attendanceForm);
 
@@ -352,6 +354,8 @@ public class StudentAttendanceService {
 	
 	/**
 	 * 過去日の未入力チェック
+	 * 
+	 * @author 大村一峰  – Task.25
 	 * @return 勤怠未入力数があるかの結果
 	 * @throws ParseException
 	 */
@@ -374,6 +378,8 @@ public class StudentAttendanceService {
 	
 	/**
 	 * 入力された出退勤の{時間}{分}をhh:mm形式に変換
+	 * 
+	 * @author 大村一峰  – Task.26
 	 * @param attendanceForm
 	 */
 	public void formatConversion(AttendanceForm attendanceForm){

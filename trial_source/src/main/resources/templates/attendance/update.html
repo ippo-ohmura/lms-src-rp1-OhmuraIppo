@@ -25,6 +25,7 @@
 				<table class="table table-hover dataTable no-footer">
 					<thead>
 						<tr>
+							<!-- 大村一峰 – Task.26 -->
 							<th class="w140">日付</th>
 							<th class="w140">コース内容</th>
 							<th class="w60"></th>
@@ -49,6 +50,7 @@
 								<td class="w140">[[${dailyAttendanceForm.dispTrainingDate}]]</td>
 								<td class="w140">[[${dailyAttendanceForm.sectionName}]]</td>
 								<td class="w60"><input type="button" class="btn btn-success" value="定時" /></td>
+								<!-- 大村一峰 – Task.26 -->
 								<td class="w70">
 									<select th:name="|attendanceList[${stat.index}].trainingStartTimeHour|" class="form-control">
 										<option th:each="hours : ${attendanceForm.hours}" th:value="${hours.key}" th:inlne="text" class="form-control" 
