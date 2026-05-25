@@ -204,5 +204,28 @@ public class AttendanceUtil {
 		}
 		return Integer.parseInt(timeString.substring(3, 5));
 	}
+	
+	/**
+	 * 受講時間数を算出
+	 * 
+	 * @author 大村一峰  – Task.27
+	 * @param trainingStartTime
+	 * @param trainingEndTime
+	 * @return 受講トータル時間
+	 */
+	public TrainingTime calcJukoTime(TrainingTime trainingStartTime,TrainingTime trainingEndTime) {
+		
+		//出勤時間(分に変換)
+		int startTotalMinutes = trainingEndTime.getHour() * 60 + trainingStartTime.getMinute();
+		//退勤時間(分に変換)
+		int endTotalMinutes = trainingEndTime.getHour() * 60 + trainingEndTime.getMinute();
+		//稼働時間(分に変換)
+		int workingMinutes = startTotalMinutes - endTotalMinutes;
+		
+		int hour = workingMinutes / 60;
+		int minute = workingMinutes % 60;
+		TrainingTime total = new TrainingTime(hour, minute);
+		return total;
+	}
 
 }
