@@ -138,6 +138,17 @@ public class AttendanceController {
 	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
 			throws ParseException {
 
+		// 大村一峰 – Task.26
+		// 入力された出退勤の{時間}{分}をhh:mm形式に変換
+		studentAttendanceService.formatConversion(attendanceForm);
+		
+		// 大村一峰 – Task.27
+		// 入力チェック
+		studentAttendanceService.updateInputCheck(attendanceForm, result);
+		if (result.hasErrors()) {
+		 	return "attendance/update";
+		}		
+		
 		// 更新
 		String message = studentAttendanceService.update(attendanceForm);
 		model.addAttribute("message", message);
@@ -145,7 +156,7 @@ public class AttendanceController {
 		List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
-
+		
 		return "attendance/detail";
 	}
 

@@ -216,11 +216,11 @@ public class AttendanceUtil {
 	public TrainingTime calcJukoTime(TrainingTime trainingStartTime,TrainingTime trainingEndTime) {
 		
 		//出勤時間(分に変換)
-		int startTotalMinutes = trainingEndTime.getHour() * 60 + trainingStartTime.getMinute();
+		int startTotalMinutes = trainingStartTime.getHour() * 60 + trainingStartTime.getMinute();
 		//退勤時間(分に変換)
 		int endTotalMinutes = trainingEndTime.getHour() * 60 + trainingEndTime.getMinute();
 		//稼働時間(分に変換)
-		int workingMinutes = startTotalMinutes - endTotalMinutes;
+		int workingMinutes = endTotalMinutes - startTotalMinutes;
 		
 		int hour = workingMinutes / 60;
 		int minute = workingMinutes % 60;
