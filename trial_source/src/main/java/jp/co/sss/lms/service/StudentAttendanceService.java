@@ -471,7 +471,6 @@ public class StudentAttendanceService {
 		                    messageUtil.getMessage(Constants.VALID_KEY_MAXLENGTH, new String[] { note, max })
 		                )
 		        );
-	            hasCurrentRowError = true;
 	        }
 
 	        // 出勤時刻の「時」だけ、「分」だけといった片側未入力チェック
@@ -493,7 +492,6 @@ public class StudentAttendanceService {
 		                    messageUtil.getMessage(Constants.INPUT_INVALID, new String[] { startTimeMsg })
 		                )
 		        );
-	            hasCurrentRowError = true;
 	        }
 
 	        // 退勤時刻の「時」だけ、「分」だけといった片側未入力チェック
@@ -515,13 +513,12 @@ public class StudentAttendanceService {
 		                    messageUtil.getMessage(Constants.INPUT_INVALID, new String[] { endTimeMsg })
 		                )
 		        );
-	            hasCurrentRowError = true;
 	        }
 
 	        // エラーがある場合、後続チェックはスキップ
-	        if (hasCurrentRowError) {
-	            continue;
-	        }
+	        if (result.hasErrors()) {
+	        	continue;
+			}
 	        
 	        // 「出勤なし、退勤あり」の矛盾チェック
 	        if (isStartTimeEmpty && !isEndTimeEmpty) {
